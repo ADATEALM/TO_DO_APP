@@ -3,11 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo App</title>
+    <title> واجباتي </title>
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <link rel="stylesheet" href="style.css">
     <script src="app.js" defer></script>
 </head>
+
+
+
+
+
+<style>
+    .app-header {
+        background-color: var(--primary-color);
+        color: var(--text-color);
+        padding: 6px 8px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid var(--accent-color);
+        font-size: 0.8rem;
+        line-height: 1.4;
+        margin-bottom: 0;
+        border-radius: 8px;
+    }
+    .app-header strong {
+        color: var(--accent-color);
+    }
+    .header-buttons {
+        margin-top: 4px;
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    .header-buttons a {
+        background-color: var(--accent-color);
+        color: var(--background);
+        padding: 5px 12px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.75rem;
+        transition: background-color 0.3s;
+    }
+    .header-buttons a:hover {
+        background-color: #00cfa1;
+    }
+
+    @media (max-width: 480px) {
+        .app-header {
+            font-size: 0.75rem;
+            padding: 5px 6px;
+        }
+        .header-buttons a {
+            padding: 4px 10px;
+            font-size: 0.7rem;
+        }
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -40,8 +107,13 @@ body{
     flex-direction: column;
     align-items: center;
 }
-h1{
-    margin-top: 100px;
+
+
+
+
+
+h1 {
+    margin-top: 0;
     margin-bottom: 20px;
     font-size: 3rem;
     font-weight: 800;
@@ -49,6 +121,16 @@ h1{
     text-align: center;
     color: var(--accent-color);
 }
+
+
+
+
+
+
+
+
+
+
 .wrapper{
     width: 700px;
     max-width: 100%;
@@ -162,11 +244,37 @@ input[type="checkbox"]{
 
 </style>
 <body>
-    <h1>Todo App</h1>
+
+
+
+
+
+
+    <header class="app-header">
+     
+
+    <p>
+        مرحباً بك في تطبيق <strong>واجباتي</strong> تم بواسطة <strong>أداة علم</strong> –
+        يمكنك الوصول إلى  <strong>موقعنا</strong> و  <strong>صفحاتنا</strong> أو  على تطبيق <strong>تيليجرام</strong> من الروابط التالية:
+    </p>
+    <div class="header-buttons">
+        <a href="https://adatealm.github.io/ADATEALM/?fbclid=IwY2xjawKC4FxleHRuA2FlbQIxMABicmlkETFhVDVUTmNWRTNJTExUb1E1AR6IoqOP7mGxEVYPq9jI-fXzmU73BTMA3eAdoaA_eXXnsZURbTu2Dlk14rsirQ_aem_bgqzUZJ81cBfmw-eEb9fPA#Download" target="_blank">زيارة الموقع</a>
+        <a href="https://t.me/adatealm/144" target="_blank">قناتنا  على تطبيق التيليجرام </a>
+    </div>
+
+    </header>
+
+
+
+
+
+
+
+    <h1> واجباتي </h1>
     <div class="wrapper">
         <form>
             <input id="todo-input" type="text" 
-            placeholder="write anything and hit enter to add" autocomplete="off">
+            placeholder="⚡ اكتب أي شيء واضغط Enter لإضافة ⚡ " autocomplete="off">
             <button id="add-button">اضافة </button>
         </form>
         <ul id="todo-list">
@@ -292,5 +400,46 @@ function getTodos(){
     return JSON.parse(todos);
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
