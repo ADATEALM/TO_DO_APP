@@ -1,315 +1,661 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> واجباتي </title>
-    <link rel="icon" type="image/png" href="../images/favicon.png">
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
+    <title>ختمة القرآن في 30 يومًا</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0d6e62;
+            --secondary-color: #d4af37;
+            --accent-color: #28a79c;
+            --text-color: #2d3436;
+            --bg-color: #f5f5f5;
+            --card-bg: #ffffff;
+            --button-gradient-start: #0d6e62;
+            --button-gradient-end: #28a79c;
+            --hover-gradient-start: #28a79c;
+            --hover-gradient-end: #0d6e62;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        .dark-mode {
+            --primary-color: #1e3a3a;
+            --secondary-color: #d4af37;
+            --accent-color: #2a9d8f;
+            --text-color: #f5f5f5;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --button-gradient-start: #1e3a3a;
+            --button-gradient-end: #2a9d8f;
+            --hover-gradient-start: #2a9d8f;
+            --hover-gradient-end: #1e3a3a;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Amiri', serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            transition: all 0.5s ease;
+            line-height: 1.8;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 30px 20px;
+            position: relative;
+            box-shadow: var(--box-shadow);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin: 0 0 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px 15px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .custom-button {
+            background: linear-gradient(135deg, var(--button-gradient-start), var(--button-gradient-end));
+            color: white;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1 1 250px;
+            max-width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: var(--box-shadow);
+            min-height: 60px;
+        }
+
+        .custom-button:hover {
+            background: linear-gradient(135deg, var(--hover-gradient-start), var(--hover-gradient-end));
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .days-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 12px;
+            padding: 25px 15px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .day-card {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: white;
+            text-decoration: none;
+            padding: 18px 12px;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 80px;
+        }
+
+        .day-card.current-day {
+            background: linear-gradient(135deg, #d4af37, #f1c40f);
+            transform: scale(1.05);
+        }
+
+        .day-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0.3),
+                rgba(255, 255, 255, 0)
+            );
+            transform: rotate(30deg);
+            transition: all 0.5s;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .day-card:active {
+            transform: translateY(2px);
+        }
+
+        .day-card:hover::before {
+            left: 100%;
+        }
+
+        .day-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .progress-container {
+            width: 90%;
+            max-width: 800px;
+            margin: 25px auto;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            height: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .countdown-container {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 20px auto;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .countdown-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .countdown-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            min-width: 120px;
+        }
+        
+        .countdown-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .custom-button {
+                padding: 12px 20px;
+                font-size: 1rem;
+                min-height: 55px;
+            }
+            
+            .days-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .day-card {
+                padding: 15px 10px;
+                font-size: 1rem;
+                min-height: 70px;
+            }
+            
+            .day-number {
+                font-size: 1.5rem;
+            }
+            
+            .countdown-item {
+                min-width: 100px;
+                padding: 8px 10px;
+            }
+            
+            .countdown-value {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 20px 15px 20px 60px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .theme-toggle {
+                left: 10px;
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+            
+            .days-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 20px 10px;
+            }
+            
+            .custom-button {
+                width: 100%;
+                max-width: none;
+                min-height: 50px;
+            }
+
+            .progress-container {
+                height: 12px;
+            }
+            
+            .countdown-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .countdown-item {
+                width: 80%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 400px) {
+            header {
+                padding: 15px 10px 15px 50px;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .theme-toggle {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+            
+            .days-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .custom-button {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
-
-
-
-
-
-<style>
-    .app-header {
-        background-color: var(--primary-color);
-        color: var(--text-color);
-        padding: 6px 8px;
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid var(--accent-color);
-        font-size: 0.8rem;
-        line-height: 1.4;
-        margin-bottom: 0;
-        border-radius: 8px;
-    }
-    .app-header strong {
-        color: var(--accent-color);
-    }
-    .header-buttons {
-        margin-top: 4px;
-        display: flex;
-        justify-content: center;
-        gap: 6px;
-        flex-wrap: wrap;
-    }
-    .header-buttons a {
-        background-color: var(--accent-color);
-        color: var(--background);
-        padding: 5px 12px;
-        border-radius: 30px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 0.75rem;
-        transition: background-color 0.3s;
-    }
-    .header-buttons a:hover {
-        background-color: #00cfa1;
-    }
-
-    @media (max-width: 480px) {
-        .app-header {
-            font-size: 0.75rem;
-            padding: 5px 6px;
-        }
-        .header-buttons a {
-            padding: 4px 10px;
-            font-size: 0.7rem;
-        }
-    }
-</style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<style>
-    :root{
-    --background: #101114;
-    --primary-color: #1C1D20;
-    --secondary-color: #4A4D57;
-    --accent-color: #00FFC4;
-    --text-color: #F9F9F9;
-}
-*{
-    margin: 0;
-    padding: 0;
-}
-html{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 16pt;
-  color: var(--text-color);
-}
-body{
-    min-height: 100vh;
-    padding: 10px;
-    background-color: var(--background);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-
-
-
-h1 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 3rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    text-align: center;
-    color: var(--accent-color);
-}
-
-
-
-
-
-
-
-
-
-
-.wrapper{
-    width: 700px;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-#todo-input{
-    box-sizing: border-box;
-    padding: 12px 20px;
-    width: 100%;
-    background: none;
-    border: 2px solid var(--secondary-color);
-    border-radius: 1000px;
-    font: inherit;
-    color: var(--text-color);
-    caret-color: var(--accent-color);
-}
-#todo-input:focus{
-    outline: none;
-}
-form{
-    position: relative;
-}
-#add-button{
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    background-color: var(--accent-color);
-    height: 100%;
-    padding: 0 30px;
-    border: none;
-    border-radius: 1000px;
-    font: inherit;
-    font-weight: 600;
-    color: var(--background);
-    cursor: pointer;
-}
-.todo{
-    margin-bottom: 10px;
-    padding: 0 16px;
-    background-color: var(--primary-color);
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-}
-.todo .todo-text{
-    padding: 15px;
-    padding-right: 0;
-    flex-grow: 1;
-    transition: 200ms ease;
-}
-.delete-button{
-    padding: 3px;
-    background: none;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-.delete-button svg{
-    transition: 200ms ease;
-}
-.delete-button:hover svg{
-    fill: #ff0033;
-}
-.custom-checkbox{
-    border: 2px solid var(--accent-color);
-    border-radius: 50%;
-    min-height: 20px;
-    min-width: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    transition: 200ms ease;
-    cursor: pointer;
-}
-input[type="checkbox"]:checked ~ .custom-checkbox{
-    background-color: var(--accent-color);
-}
-input[type="checkbox"]:checked ~ .custom-checkbox svg{
-    fill: var(--primary-color);
-}
-input[type="checkbox"]:checked ~ .todo-text{
-    text-decoration: line-through;
-    color: var(--secondary-color);
-}
-input[type="checkbox"]{
-    display: none;
-}
-@media(max-width: 500px){
-    html{
-        font-size: 12pt;
-    }
-    #add-button{
-        position: unset;
-        width: 100%;
-        margin-top: 10px;
-        padding: 15px;
-        height: auto;
-    }
-    h1{
-        margin-top: 50px;
-        font-size: 15vw;
-    }
-}
-
-
-</style>
 <body>
-
-
-
-
-
-
-    <header class="app-header">
-        <p>
-            مرحباً بك في تطبيق <strong>واجباتي</strong> تم بواسطة <strong>أداة علم</strong> – 
-            يمكنك الوصول إلى <strong>موقعنا</strong> و <strong>صفحاتنا</strong> أو على تطبيق <strong>تيليجرام</strong> من الروابط التالية:
-        </p>
-        <div class="header-buttons">
-            <a href="https://adatealm.github.io/ADATEALM/?fbclid=IwY2xjawKC4FxleHRuA2FlbQIxMABicmlkETFhVDVUTmNWRTNJTExUb1E1AR6IoqOP7mGxEVYPq9jI-fXzmU73BTMA3eAdoaA_eXXnsZURbTu2Dlk14rsirQ_aem_bgqzUZJ81cBfmw-eEb9fPA#Download" target="_blank" rel="noopener noreferrer">زيارة الموقع</a>
-            <a href="https://t.me/adatealm/144" target="_blank" rel="noopener noreferrer">قناتنا على تطبيق التيليجرام</a>
+    <header>
+        <button id="themeToggle" class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+        <h1>ختمة القرآن الكريم</h1>
+        <p>برنامج ختم القرآن في 30 يومًا - يشفع لك يوم القيامة</p>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="countdown-container">
+            <div class="countdown-title" id="currentDayTitle">اليوم الأول</div>
+            <div class="countdown-info">
+                <div class="countdown-item">
+                    <div class="countdown-value" id="daysLeft">30</div>
+                    <div class="countdown-label">أيام متبقية في هذه الدورة</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="hoursLeft">24</div>
+                    <div class="countdown-label">ساعة متبقية حتى نهاية اليوم</div>
+                </div>
+            </div>
         </div>
     </header>
-    
 
-
-
-
-
-
-
-    <h1> واجباتي </h1>
-    <div class="wrapper">
-        <form>
-            <input id="todo-input" type="text" 
-            placeholder="⚡ اكتب أي شيء واضغط Enter لإضافة ⚡ " autocomplete="off">
-            <button id="add-button">اضافة </button>
-        </form>
-        <ul id="todo-list">
-            <!-- <li class="todo">
-                <input type="checkbox" id="todo-1">
-                <label class="custom-checkbox" for="todo-1">
-                    <svg fill="transparent" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                        <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
-                    </svg>
-                </label>
-                <label for="todo-1" class="todo-text">
-                    webdev project with html, css and js
-                </label>
-                <button class="delete-button">
-                    <svg fill="var(--secondary-color)" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                        <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
-                    </svg>
+    <main>
+        <section style="padding: 20px; max-width: 900px; margin: 0 auto;">
+            <div class="buttons-container">
+                <button class="custom-button" onclick="navigateToPage('#')">
+                    <i class="fas fa-calendar-alt"></i> (قريبا) اختم في أربعين يوم
                 </button>
-            </li>
-            <li class="todo">
-                <input type="checkbox" id="todo-2">
-                <label class="custom-checkbox" for="todo-2">
-                    <svg fill="transparent" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                        <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
-                    </svg>
-                </label>
-                <label for="todo-2" class="todo-text">
-                    webdev project with html, css and js
-                </label>
-                <button class="delete-button">
-                    <svg fill="var(--secondary-color)" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                        <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
-                    </svg>
+                <button class="custom-button" onclick="navigateToPage('index.html')">
+                    <i class="fas fa-book-open"></i> أختم في ثلاثين يوم 
                 </button>
-            </li> -->
-        </ul>
-    </div>
+                <button class="custom-button" onclick="navigateToPage('#')">
+                    <i class="fas fa-trophy"></i> (قريبا) الختم في سبعة أيام
+                </button>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <section style="padding: 20px; max-width: 900px; margin: 0 auto;">
+            <p style="font-size: 1.2rem; color: var(--accent-color);">
+
+
+
+
+
+
+
+                مَن نَفَّسَ عن مُؤْمِنٍ كُرْبَةً مِن كُرَبِ الدُّنْيَا، نَفَّسَ اللَّهُ عنْه كُرْبَةً مِن كُرَبِ يَومِ القِيَامَةِ، وَمَن يَسَّرَ علَى مُعْسِرٍ، يَسَّرَ اللَّهُ عليه في الدُّنْيَا وَالآخِرَةِ، وَمَن سَتَرَ مُسْلِمًا، سَتَرَهُ اللَّهُ في الدُّنْيَا وَالآخِرَةِ، وَاللَّهُ في عَوْنِ العَبْدِ ما كانَ العَبْدُ في عَوْنِ أَخِيهِ، وَمَن سَلَكَ طَرِيقًا يَلْتَمِسُ فيه عِلْمًا، سَهَّلَ اللَّهُ له به طَرِيقًا إلى الجَنَّةِ، وَما اجْتَمع قَوْمٌ في بَيْتٍ مِن بُيُوتِ اللهِ، يَتْلُونَ كِتَابَ اللهِ، وَيَتَدَارَسُونَهُ بيْنَهُمْ؛ إِلَّا نَزَلَتْ عليهمِ السَّكِينَةُ، وَغَشِيَتْهُمُ الرَّحْمَةُ، وَحَفَّتْهُمُ المَلَائِكَةُ، وَذَكَرَهُمُ اللَّهُ فِيمَن عِنْدَهُ، وَمَن بَطَّأَ به عَمَلُهُ، لَمْ يُسْرِعْ به نَسَبُهُ.
+                الراوي : أبو هريرة | المحدث : مسلم | المصدر : صحيح مسلم
+                الصفحة أو الرقم: 2699 | خلاصة حكم المحدث : [صحيح]
+                التخريج : من أفراد مسلم على البخاري
+                
+                
+        
+                <br>
+                <small class="hadith-source"> <a href="https://dorar.net/hadith/sharh/70716" target="_blank" style="color: var(--secondary-color);">المصدر : الدرر السنية </a></small>
+
+            </p>
+            
+            <div class="buttons-container">
+                <button class="custom-button" onclick="navigateToPage('#')">
+                    <i class="fas fa-calendar-alt"></i>  (قريبا)   اختم في أربعين يوم                 </button>
+                <button class="custom-button" onclick="navigateToPage('index.html')">
+                    <i class="fas fa-book-open"></i> أختم في ثلاثين يوم 
+                </button>
+                <button class="custom-button" onclick="navigateToPage('#')">
+                    <i class="fas fa-trophy"></i>  (قريبا) الختم في سبعة أيام
+                </button>
+            </div>
+        </section>
+
+
+
+
+        
+        <section style="padding: 30px 20px; max-width: 800px; margin: 0 auto;">
+            <h2 style="color: var(--primary-color);">فضل قراءة القرآن</h2>
+            
+            <blockquote>
+
+
+
+
+
+
+
+
+
+                - اقْرَأِ القُرْآنَ في كُلِّ شَهْرٍ قالَ قُلتُ: إنِّي أَجِدُ قُوَّةً، قالَ: فَاقْرَأْهُ في عِشْرِينَ لَيْلَةً قالَ قُلتُ: إنِّي أَجِدُ قُوَّةً، قالَ: فَاقْرَأْهُ في سَبْعٍ وَلَا تَزِدْ علَى ذلكَ.
+                الراوي : عبدالله بن عمرو | المحدث : مسلم | المصدر : صحيح مسلم | الصفحة أو الرقم : 1159 | خلاصة حكم المحدث : [صحيح] | التخريج : أخرجه البخاري (1978)، ومسلم (1159).
+
+
+
+
+              
+                <small class="hadith-source"> <a href="https://dorar.net/hadith/sharh/8095" target="_blank" style="color: var(--secondary-color);">المصدر : الدرر السنية </a></small>
+            </blockquote>
+            
+            <blockquote>
+
+
+                عن عبدِ اللَّهِ بنِ عمرٍو أنَّهُ سألَ النَّبيَّ صلى الله عليه وسلم في كم يقرأُ القرآنَ قالَ: في أربعينَ يومًا. ثمَّ قالَ: في شَهرٍ. ثمَّ قالَ: في عشرينَ. ثمَّ قالَ: في خمسَ عشرةَ. ثمَّ قالَ: في عشرٍ. ثمَّ قالَ: في سبعٍ. لم ينزل من سبعٍ.
+الراوي : عبدالله بن عمرو | المحدث : الألباني | المصدر : صحيح أبي داود
+الصفحة أو الرقم: 1395 | خلاصة حكم المحدث : صحيح إلا قوله: "لم ينزل من سبع" شاذ
+التخريج : أخرجه أبو داود (1395) واللفظ له، والترمذي (2947) مختصراً
+
+
+
+                <small class="hadith-source">   <a href="https://dorar.net/hadith/sharh/30395" target="_blank" style="color: var(--secondary-color);">المصدر : الدرر السنية </a></small>
+            </blockquote>
+        </section>
+
+
+
+
+        
+        <section>
+            <h2 style="color: var(--primary-color); margin-top: 30px;">خطة الختمة في 30 يومًا</h2>
+            <div class="days-container" id="daysContainer">
+                <!-- سيتم ملؤها بالجافاسكريبت -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // دالة تحويل الأرقام إلى كلمات
+        function numberToArabicWords(number) {
+            const units = ['', 'الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 
+                          'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر',
+                          'الحادي عشر', 'الثاني عشر', 'الثالث عشر', 'الرابع عشر', 'الخامس عشر',
+                          'السادس عشر', 'السابع عشر', 'الثامن عشر', 'التاسع عشر', 'العشرون',
+                          'الحادي والعشرون', 'الثاني والعشرون', 'الثالث والعشرون', 'الرابع والعشرون', 'الخامس والعشرون',
+                          'السادس والعشرون', 'السابع والعشرون', 'الثامن والعشرون', 'التاسع والعشرون', 'الثلاثون'];
+            return units[number];
+        }
+
+        function navigateToPage(page) {
+            window.location.href = page;
+        }
+
+        function updateProgressAndCountdown() {
+            // تاريخ البداية الثابت - 26 أبريل 2025 الساعة 00:00
+            const startDate = new Date(2025, 3, 26, 0, 0, 0);
+            
+            // التاريخ الحالي
+            const now = new Date();
+            
+            // الفرق بالمللي ثانية
+            const diffMs = now - startDate;
+            
+            // التحويل إلى أيام (مع الاعتبار أن اليوم يبدأ من منتصف الليل)
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            
+            // حساب اليوم الحالي في الدورة (1-30)
+            const currentDayInCycle = (diffDays % 30) + 1;
+            
+            // الأيام المتبقية في الدورة الحالية
+            const daysLeftInCycle = 30 - currentDayInCycle;
+            
+            // حساب الساعات المتبقية حتى نهاية اليوم (حتى منتصف الليل)
+            const endOfDay = new Date();
+            endOfDay.setHours(24, 0, 0, 0);
+            const hoursLeft = Math.floor((endOfDay - now) / (1000 * 60 * 60));
+            
+            // تحديث واجهة المستخدم
+            document.getElementById('currentDayTitle').textContent = `اليوم ${numberToArabicWords(currentDayInCycle)}`;
+            document.getElementById('daysLeft').textContent = daysLeftInCycle;
+            document.getElementById('hoursLeft').textContent = hoursLeft;
+            
+            // تحديث شريط التقدم
+            const progressPercentage = (currentDayInCycle / 30) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercentage}%`;
+            
+            // تحديث أزرار الأيام
+            updateDayButtons(currentDayInCycle);
+        }
+
+        function updateDayButtons(currentDay) {
+            const dayButtons = document.querySelectorAll('.day-card');
+            dayButtons.forEach((btn, index) => {
+                const dayNum = index + 1;
+                if (dayNum === currentDay) {
+                    btn.classList.add('current-day');
+                } else {
+                    btn.classList.remove('current-day');
+                }
+            });
+        }
+
+        // تبديل الوضع الليلي/النهاري
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            
+            // حفظ التفضيل في localStorage
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            
+            // تغيير رمز الزر
+            const icon = themeToggle.querySelector('i');
+            icon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+        });
+
+        // تحميل التفضيل المحفوظ عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحميل وضع الألوان
+            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (savedDarkMode) {
+                document.body.classList.add('dark-mode');
+                const icon = themeToggle.querySelector('i');
+                icon.className = 'fas fa-sun';
+            }
+            
+            // إنشاء أزرار الأيام
+            const daysContainer = document.getElementById('daysContainer');
+            const days = [
+                {number: 1, link: "YAWM_01-30_WARCH.html"},
+                {number: 2, link: "YAWM_02-30_WARCH.html"},
+                {number: 3, link: "YAWM_03-30_WARCH.html"},
+                {number: 4, link: "YAWM_04-30_WARCH.html"},
+                {number: 5, link: "#"},
+                {number: 6, link: "#"},
+                {number: 7, link: "#"},
+                {number: 8, link: "#"},
+                {number: 9, link: "#"},
+                {number: 10, link: "#"},
+                {number: 11, link: "#"},
+                {number: 12, link: "#"},
+                {number: 13, link: "#"},
+                {number: 14, link: "#"},
+                {number: 15, link: "#"},
+                {number: 16, link: "#"},
+                {number: 17, link: "#"},
+                {number: 18, link: "#"},
+                {number: 19, link: "#"},
+                {number: 20, link: "#"},
+                {number: 21, link: "#"},
+                {number: 22, link: "#"},
+                {number: 23, link: "#"},
+                {number: 24, link: "#"},
+                {number: 25, link: "#"},
+                {number: 26, link: "#"},
+                {number: 27, link: "#"},
+                {number: 28, link: "#"},
+                {number: 29, link: "#"},
+                {number: 30, link: "#"}
+            ];
+            
+            days.forEach(day => {
+                const dayCard = document.createElement('a');
+                dayCard.href = day.link;
+                dayCard.className = 'day-card';
+                dayCard.innerHTML = `
+                    <span class="day-number">${day.number}</span>
+                    <span>اليوم ${numberToArabicWords(day.number)}</span>
+                `;
+                daysContainer.appendChild(dayCard);
+            });
+            
+            // تحديث العدادات
+            updateProgressAndCountdown();
+            
+            // تحديث كل ساعة
+            setInterval(updateProgressAndCountdown, 3600000);
+        });
+    </script>
 </body>
 </html>
 
@@ -322,82 +668,290 @@ input[type="checkbox"]{
 
 
 
-<script>
-    const todoForm = document.querySelector('form');
-const todoInput = document.getElementById('todo-input');
-const todoListUL = document.getElementById('todo-list');
 
-let allTodos = getTodos();
-updateTodoList();
 
-todoForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    addTodo();
-})
 
-function addTodo(){
-    const todoText = todoInput.value.trim();
-    if(todoText.length > 0){
-        const todoObject = {
-            text: todoText,
-            completed: false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إشعارات هامة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
         }
-        allTodos.push(todoObject);
-        updateTodoList();
-        saveTodos();
-        todoInput.value = "";
-    }  
-}
-function updateTodoList(){
-    todoListUL.innerHTML = "";
-    allTodos.forEach((todo, todoIndex)=>{
-        todoItem = createTodoItem(todo, todoIndex);
-        todoListUL.append(todoItem);
-    })
-}
-function createTodoItem(todo, todoIndex){
-    const todoId = "todo-"+todoIndex;
-    const todoLI = document.createElement("li");
-    const todoText = todo.text;
-    todoLI.className = "todo";
-    todoLI.innerHTML = `
-        <input type="checkbox" id="${todoId}">
-        <label class="custom-checkbox" for="${todoId}">
-            <svg fill="transparent" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
-        </label>
-        <label for="${todoId}" class="todo-text">
-            ${todoText}
-        </label>
-        <button class="delete-button">
-            <svg fill="var(--secondary-color)" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
-        </button>
-    `
-    const deleteButton = todoLI.querySelector(".delete-button");
-    deleteButton.addEventListener("click", ()=>{
-        deleteTodoItem(todoIndex);
-    })
-    const checkbox = todoLI.querySelector("input");
-    checkbox.addEventListener("change", ()=>{
-        allTodos[todoIndex].completed = checkbox.checked;
-        saveTodos();
-    })
-    checkbox.checked = todo.completed;
-    return todoLI;
-}
-function deleteTodoItem(todoIndex){
-    allTodos = allTodos.filter((_, i)=> i !== todoIndex);
-    saveTodos();
-    updateTodoList();
-}
-function saveTodos(){
-    const todosJson = JSON.stringify(allTodos);
-    localStorage.setItem("todos", todosJson);
-}
-function getTodos(){
-    const todos = localStorage.getItem("todos") || "[]";
-    return JSON.parse(todos);
-}
-</script>
+        .custom-modal {
+            display: flex;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+        .custom-modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .custom-button {
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn-close {
+            background-color: #d9534f;
+            color: white;
+        }
+        .btn-close:hover {
+            background-color: #c9302c;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- إشعار سورة الكهف -->
+    <div id="kahfModal" class="custom-modal" style="display: none;">
+        <div class="custom-modal-content">
+            <h1> فضل سورة الكهف </h1>
+            <p>من قرأ سورةَ ( الكهفِ ) في يومِ الجمعةِ أضاء له من النورِ ما بين الجمُعَتَين
+              الراوي : أبو سعيد الخدري | المحدث : الألباني | المصدر : صحيح الترغيب | الصفحة أو الرقم : 736 | خلاصة حكم المحدث : صحيح | التخريج : أخرجه البيهقي (6209) واللفظ له، وأخرجه الحاكم (3392) باختلاف يسير</p>
+           
+
+
+
+
+            <button onclick="window.location.href='سورة الكهف مكتوبة.html'" class="custom-button">انتقل إليها الآن</button>
+           <br><br>
+           <button class="custom-button btn-close" onclick="closeModal('kahfModal')">إغلاق</button>
+        </div>
+    </div>
+    
+    <!-- إشعار صلاة الجمعة -->
+    <div id="jumaaModal" class="custom-modal" style="display: none;">
+        <div class="custom-modal-content">
+            <h1> فضل صلاة الجمعة </h1>
+            <audio id="jumaaAudio">
+                <source src="SALAT JOMOAA/JOMAA.mp3" type="audio/mpeg">
+                متصفحك لا يدعم تشغيل الصوت.
+            </audio>
+
+
+
+
+            <p>
+            
+من غسَّلَ يومَ الجمعةِ واغتسلَ ثمَّ بَكَّرَ وابتَكرَ ومشى ولم يرْكب ودنا منَ الإمامِ فاستمعَ ولم يلغُ كانَ لَهُ بِكلِّ خطوةٍ عملُ سنةٍ أجرُ صيامِها وقيامِها
+الراوي : أوس بن أبي أوس وقيل أوس بن أوس والد عمرو | المحدث : الألباني | المصدر : صحيح أبي داود
+الصفحة أو الرقم: 345 | خلاصة حكم المحدث : صحيح
+
+</p>
+       
+
+              الصَّلَوَاتُ الخَمْسُ، وَالْجُمْعَةُ إلى الجُمْعَةِ، وَرَمَضَانُ إلى رَمَضَانَ، مُكَفِّرَاتٌ ما بيْنَهُنَّ إِذَا اجْتَنَبَ الكَبَائِرَ.
+  الراوي : أبو هريرة | المحدث : مسلم | المصدر : صحيح مسلم
+  الصفحة أو الرقم: 233 | خلاصة حكم المحدث : [صحيح]
+  </p>
+
+
+            <p>قال رسول الله ﷺ: "أفضلُ يومٍ طلعتْ فيه الشمسُ يومُ الجمعةِ، فيه خُلِقَ آدمُ، وفيه أُدخلَ الجنةَ، وفيه أُخرجَ منها"
+              .   [صحيح] - [رواه مسلم] - [صحيح مسلم - 854]
+            </p>
+
+
+        
+
+            <button class="custom-button btn-close" onclick="closeModal('jumaaModal')">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- الإشعار العام -->
+    <div id="generalModal" class="custom-modal" style="display: none;">
+        <div class="custom-modal-content">
+            
+        
+            <h1>⚡ أَدَاة عِلْم ⚡</h1>
+            <p>نحن نعمل باستمرار على تطوير وتحسين موقعنا لنقدم لك أفضل تجربة ممكنة.</p>
+            <p>المزيد قادم  والتحديثات يومية ان شاء الله </p>
+            <p>  نذكركم ان التجربة على اجهزة الكمبيوتر افضل بكثير على الهواتف وسنحاول  باذم الله تحسين تجربة  على الهواتف </p>
+            <button class="custom-button btn-close" onclick="closeModal('generalModal')">إغلاق</button>
+        </div>
+    </div>
+    
+    <script>
+      function closeModal(modalId) {
+          document.getElementById(modalId).style.display = "none";
+      }
+  
+      function showModals() {
+          let today = new Date();
+          let dayOfWeek = today.getDay();
+          let hours = today.getHours();
+  
+          // ✅ عرض الإشعار العام فورًا
+          document.getElementById("generalModal").style.display = "flex";
+  
+          if (dayOfWeek === 5) { // الجمعة فقط
+              document.getElementById("kahfModal").style.display = "flex"; // إشعار سورة الكهف
+  
+              if (hours < 14) { // قبل 14:00 فقط
+                  document.getElementById("jumaaModal").style.display = "flex"; // إشعار صلاة الجمعة
+                  
+                  let audio = document.getElementById("jumaaAudio");
+                  if (audio && !audio.dataset.played) { // تشغيل الصوت عند ظهور الإشعار
+                      let playAudio = () => {
+                          audio.play().then(() => {
+                              audio.dataset.played = "true"; // منع التكرار
+                              console.log("تم تشغيل صوت صلاة الجمعة.");
+                          }).catch(error => console.log("تشغيل الصوت يتطلب تفاعل المستخدم", error));
+                      };
+  
+                      if (document.hasFocus()) {
+                          playAudio();
+                      } else {
+                          document.addEventListener("click", playAudio, { once: true });
+                          document.addEventListener("touchstart", playAudio, { once: true });
+                      }
+  
+                      audio.onended = function () {
+                          console.log("انتهى تشغيل ملف الصوت.");
+                      };
+                  }
+              }
+          }
+      }
+  
+      document.addEventListener("DOMContentLoaded", function() {
+          let today = new Date();
+          let dayOfWeek = today.getDay();
+          let hours = today.getHours();
+  
+          if (dayOfWeek === 5 && hours < 14) { // تشغيل الصوت فقط يوم الجمعة قبل 14:00
+              let audio = document.getElementById("jumaaAudio");
+              if (audio) {
+                  document.body.addEventListener("click", function() {
+                      if (audio.paused) {
+                          audio.play().catch(error => console.log("تشغيل الصوت يتطلب تفاعل المستخدم", error));
+                      }
+                  }, { once: true });
+              }
+          }
+      });
+  
+      // ✅ تشغيل `showModals` دائمًا لإظهار الإشعار العام مباشرةً
+      window.onload = showModals;
+  </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
