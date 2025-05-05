@@ -1,165 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> واجباتي </title>
     <link rel="icon" type="image/png" href="../images/favicon.png">
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
-</head>
-
-
-
-
-
-<style>
-    .app-header {
-        background-color: var(--primary-color);
-        color: var(--text-color);
-        padding: 6px 8px;
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid var(--accent-color);
-        font-size: 0.8rem;
-        line-height: 1.4;
-        margin-bottom: 0;
-        border-radius: 8px;
-    }
-    .app-header strong {
-        color: var(--accent-color);
-    }
-    .header-buttons {
-        margin-top: 4px;
-        display: flex;
-        justify-content: center;
-        gap: 6px;
-        flex-wrap: wrap;
-    }
-    .header-buttons a {
-        background-color: var(--accent-color);
-        color: var(--background);
-        padding: 5px 12px;
-        border-radius: 30px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 0.75rem;
-        transition: background-color 0.3s;
-    }
-    .header-buttons a:hover {
-        background-color: #00cfa1;
-    }
-
-    @media (max-width: 480px) {
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+    <style>
         .app-header {
-            font-size: 0.75rem;
-            padding: 5px 6px;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 6px 8px;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid var(--accent-color);
+            font-size: 0.8rem;
+            line-height: 1.4;
+            margin-bottom: 0;
+            border-radius: 8px;
+        }
+        .app-header strong {
+            color: var(--accent-color);
+        }
+        .header-buttons {
+            margin-top: 4px;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
         }
         .header-buttons a {
-            padding: 4px 10px;
-            font-size: 0.7rem;
+            background-color: var(--accent-color);
+            color: var(--background);
+            padding: 5px 12px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.75rem;
+            transition: background-color 0.3s;
         }
-    }
-</style>
+        .header-buttons a:hover {
+            background-color: #00cfa1;
+        }
 
+        @media (max-width: 480px) {
+            .app-header {
+                font-size: 0.75rem;
+                padding: 5px 6px;
+            }
+            .header-buttons a {
+                padding: 4px 10px;
+                font-size: 0.7rem;
+            }
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<style>
-    :root{
-    --background: #101114;
-    --primary-color: #1C1D20;
-    --secondary-color: #4A4D57;
-    --accent-color: #00FFC4;
-    --text-color: #F9F9F9;
-}
-*{
-    margin: 0;
-    padding: 0;
-}
-html{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 16pt;
-  color: var(--text-color);
-}
-body{
-    min-height: 100vh;
-    padding: 10px;
-    background-color: var(--background);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-
-
-
-h1 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 3rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    text-align: center;
-    color: var(--accent-color);
-}
-
-
-
-
-
-
-
-
-
-
-.wrapper{
-    width: 700px;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-#todo-input{
-    box-sizing: border-box;
-    padding: 12px 20px;
-    width: 100%;
-    background: none;
-    border: 2px solid var(--secondary-color);
-    border-radius: 1000px;
-    font: inherit;
-    color: var(--text-color);
-    caret-color: var(--accent-color);
-}
-#todo-input:focus{
-    outline: none;
-}
-form{
-    position: relative;
-}
-#add-button{
+        :root {
+            --background: #101114;
+            --primary-color: #1C1D20;
+            --secondary-color: #4A4D57;
+            --accent-color: #00FFC4;
+            --text-color: #F9F9F9;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 16pt;
+            color: var(--text-color);
+        }
+        body {
+            min-height: 100vh;
+            padding: 10px;
+            background-color: var(--background);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 3rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-align: center;
+            color: var(--accent-color);
+        }
+        .wrapper {
+            width: 700px;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        #todo-input {
+            box-sizing: border-box;
+            padding: 12px 20px;
+            width: 100%;
+            background: none;
+            border: 2px solid var(--secondary-color);
+            border-radius: 1000px;
+            font: inherit;
+            color: var(--text-color);
+            caret-color: var(--accent-color);
+        }
+        #todo-input:focus {
+            outline: none;
+        }
+        form {
+            position: relative;
+        }
+        #add-button {
     position: absolute;
     top: 0;
-    right: 0;
-
+    right: -120px; /* تم تعديلها لتقليل التزاحم مع الحافة اليسرى */
     background-color: var(--accent-color);
     height: 100%;
     padding: 0 30px;
@@ -169,87 +125,167 @@ form{
     font-weight: 600;
     color: var(--background);
     cursor: pointer;
-}
-.todo{
-    margin-bottom: 10px;
-    padding: 0 16px;
-    background-color: var(--primary-color);
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-}
-.todo .todo-text{
-    padding: 15px;
-    padding-right: 0;
-    flex-grow: 1;
-    transition: 200ms ease;
-}
-.delete-button{
-    padding: 3px;
-    background: none;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-.delete-button svg{
-    transition: 200ms ease;
-}
-.delete-button:hover svg{
-    fill: #ff0033;
-}
-.custom-checkbox{
-    border: 2px solid var(--accent-color);
-    border-radius: 50%;
-    min-height: 20px;
-    min-width: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    transition: 200ms ease;
-    cursor: pointer;
-}
-input[type="checkbox"]:checked ~ .custom-checkbox{
-    background-color: var(--accent-color);
-}
-input[type="checkbox"]:checked ~ .custom-checkbox svg{
-    fill: var(--primary-color);
-}
-input[type="checkbox"]:checked ~ .todo-text{
-    text-decoration: line-through;
-    color: var(--secondary-color);
-}
-input[type="checkbox"]{
-    display: none;
-}
-@media(max-width: 500px){
-    html{
-        font-size: 12pt;
-    }
-    #add-button{
-        position: unset;
-        width: 100%;
-        margin-top: 10px;
-        padding: 15px;
-        height: auto;
-    }
-    h1{
-        margin-top: 50px;
-        font-size: 15vw;
-    }
+    transition: background-color 0.3s;
 }
 
-
-</style>
+        #add-button:hover {
+            background-color: #00cfa1;
+        }
+        .todo {
+            margin-bottom: 10px;
+            padding: 0 16px;
+            background-color: var(--primary-color);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            cursor: move;
+            transition: transform 0.2s;
+        }
+        .todo.dragging {
+            opacity: 0.5;
+            background-color: var(--secondary-color);
+        }
+        .todo .todo-text {
+            padding: 15px;
+            padding-right: 0;
+            flex-grow: 1;
+            transition: 200ms ease;
+        }
+        .todo .todo-time {
+            font-size: 0.7rem;
+            color: var(--secondary-color);
+            margin-right: 10px;
+            min-width: 80px;
+            text-align: left;
+        }
+        .delete-button {
+            padding: 3px;
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .delete-button svg {
+            transition: 200ms ease;
+        }
+        .delete-button:hover svg {
+            fill: #ff0033;
+        }
+        .edit-button {
+            padding: 3px;
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        .edit-button svg {
+            transition: 200ms ease;
+        }
+        .edit-button:hover svg {
+            fill: var(--accent-color);
+        }
+        .custom-checkbox {
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            min-height: 20px;
+            min-width: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            transition: 200ms ease;
+            cursor: pointer;
+        }
+        input[type="checkbox"]:checked ~ .custom-checkbox {
+            background-color: var(--accent-color);
+        }
+        input[type="checkbox"]:checked ~ .custom-checkbox svg {
+            fill: var(--primary-color);
+        }
+        input[type="checkbox"]:checked ~ .todo-text {
+            text-decoration: line-through;
+            color: var(--secondary-color);
+        }
+        input[type="checkbox"] {
+            display: none;
+        }
+        .confirm-dialog {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .confirm-content {
+            background-color: var(--primary-color);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+            border: 1px solid var(--accent-color);
+        }
+        .confirm-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .confirm-buttons button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .confirm-yes {
+            background-color: #ff0033;
+            color: white;
+        }
+        .confirm-no {
+            background-color: var(--accent-color);
+            color: var(--background);
+        }
+        @media (max-width: 500px) {
+            html {
+                font-size: 12pt;
+            }
+            #add-button {
+                position: unset;
+                width: 100%;
+                margin-top: 10px;
+                padding: 15px;
+                height: auto;
+            }
+            h1 {
+                margin-top: 50px;
+                font-size: 15vw;
+            }
+            .todo {
+                flex-wrap: wrap;
+                padding: 10px;
+            }
+            .todo-time {
+                order: 1;
+                width: 100%;
+                text-align: left;
+                margin-top: 5px;
+                margin-left: 40px;
+            }
+        }
+    </style>
+</head>
 <body>
-
-
-
-
-
-
     <header class="app-header">
         <p>
             مرحباً بك في تطبيق <strong>واجباتي</strong> تم بواسطة <strong>أداة علم</strong> – 
@@ -260,13 +296,6 @@ input[type="checkbox"]{
             <a href="https://t.me/adatealm/238" target="_blank" rel="noopener noreferrer">قناتنا على تطبيق التيليجرام</a>
         </div>
     </header>
-    
-
-
-
-
-
-
 
     <h1> واجباتي </h1>
     <div class="wrapper">
@@ -276,207 +305,245 @@ input[type="checkbox"]{
             <button id="add-button">اضافة </button>
         </form>
         <ul id="todo-list">
-            <!-- <li class="todo">
-                <input type="checkbox" id="todo-1">
-                <label class="custom-checkbox" for="todo-1">
-                    <svg fill="transparent" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                        <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
-                    </svg>
-                </label>
-                <label for="todo-1" class="todo-text">
-                    webdev project with html, css and js
-                </label>
-                <button class="delete-button">
-                    <svg fill="var(--secondary-color)" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                        <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
-                    </svg>
-                </button>
-            </li>
-            <li class="todo">
-                <input type="checkbox" id="todo-2">
-                <label class="custom-checkbox" for="todo-2">
-                    <svg fill="transparent" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                        <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
-                    </svg>
-                </label>
-                <label for="todo-2" class="todo-text">
-                    webdev project with html, css and js
-                </label>
-                <button class="delete-button">
-                    <svg fill="var(--secondary-color)" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                        <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
-                    </svg>
-                </button>
-            </li> -->
+            <!-- المهام ستضاف هنا ديناميكيا -->
         </ul>
     </div>
-</body>
 
-
-
-
-
-
-
-
-
-
-<BR><BR><BR><BR><BR>
-
-
-
-
-<footer class="app-header" dir="rtl" style="font-size: 0.85em; padding: 1em;">
-
-    <p style="margin-top: 1em;">
-        تم بواسطة <strong>أداة علم</strong>، الجناح الدراسي لـ 
-        <strong>S22MCS</strong>.
-    </p>
-
-    <div class="header-buttons" style="display: flex; gap: 1em; flex-wrap: wrap;">
-        <a href="https://t.me/S22MCS" target="_blank" rel="noopener noreferrer">
-            قناة S22MCS على التيليجرام
-        </a>
-        <a href="https://t.me/S22MCS/720" target="_blank" rel="noopener noreferrer">
-            ما هي S22MCS؟
-        </a>
-        <a href="https://s22mcs.github.io/S22MCS-/d" target="_blank" rel="noopener noreferrer">
-            زيارة موقع S22MCS
-        </a>
+    <div class="confirm-dialog" id="confirmDialog">
+        <div class="confirm-content">
+            <h3>تأكيد الحذف</h3>
+            <p>هل أنت متأكد من أنك تريد حذف هذه المهمة؟</p>
+            <div class="confirm-buttons">
+                <button class="confirm-yes" id="confirmYes">نعم</button>
+                <button class="confirm-no" id="confirmNo">لا</button>
+            </div>
+        </div>
     </div>
 
-</footer>
+    <footer class="app-header" dir="rtl" style="font-size: 0.85em; padding: 1em;">
+        <p style="margin-top: 1em;">
+            تم بواسطة <strong>أداة علم</strong>، الجناح الدراسي لـ 
+            <strong>S22MCS</strong>.
+        </p>
+        <div class="header-buttons" style="display: flex; gap: 1em; flex-wrap: wrap;">
+            <a href="https://t.me/S22MCS" target="_blank" rel="noopener noreferrer">
+                قناة S22MCS على التيليجرام
+            </a>
+            <a href="https://t.me/S22MCS/720" target="_blank" rel="noopener noreferrer">
+                ما هي S22MCS؟
+            </a>
+            <a href="https://s22mcs.github.io/S22MCS-/d" target="_blank" rel="noopener noreferrer">
+                زيارة موقع S22MCS
+            </a>
+        </div>
+    </footer>
 
+    <script>
+        const todoForm = document.querySelector('form');
+        const todoInput = document.getElementById('todo-input');
+        const todoListUL = document.getElementById('todo-list');
+        const addButton = document.getElementById('add-button');
+        const confirmDialog = document.getElementById('confirmDialog');
+        const confirmYes = document.getElementById('confirmYes');
+        const confirmNo = document.getElementById('confirmNo');
 
+        let allTodos = getTodos();
+        let currentlyEditingIndex = null;
+        let todoToDeleteIndex = null;
+        
+        let sortable = new Sortable(todoListUL, {
+            animation: 150,
+            ghostClass: 'dragging',
+            onEnd: function() {
+                const newOrder = [];
+                const items = todoListUL.querySelectorAll('li');
+                items.forEach(item => {
+                    const index = parseInt(item.getAttribute('data-index'));
+                    newOrder.push(allTodos[index]);
+                });
+                allTodos = newOrder;
+                saveTodos();
+            }
+        });
 
-
-</html>
-
-
-
-
-
-
-
-
-
-
-<script>
-    const todoForm = document.querySelector('form');
-const todoInput = document.getElementById('todo-input');
-const todoListUL = document.getElementById('todo-list');
-
-let allTodos = getTodos();
-updateTodoList();
-
-todoForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    addTodo();
-})
-
-function addTodo(){
-    const todoText = todoInput.value.trim();
-    if(todoText.length > 0){
-        const todoObject = {
-            text: todoText,
-            completed: false
-        }
-        allTodos.push(todoObject);
         updateTodoList();
-        saveTodos();
-        todoInput.value = "";
-    }  
-}
-function updateTodoList(){
-    todoListUL.innerHTML = "";
-    allTodos.forEach((todo, todoIndex)=>{
-        todoItem = createTodoItem(todo, todoIndex);
-        todoListUL.append(todoItem);
-    })
-}
-function createTodoItem(todo, todoIndex){
-    const todoId = "todo-"+todoIndex;
-    const todoLI = document.createElement("li");
-    const todoText = todo.text;
-    todoLI.className = "todo";
-    todoLI.innerHTML = `
-        <input type="checkbox" id="${todoId}">
-        <label class="custom-checkbox" for="${todoId}">
-            <svg fill="transparent" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
-        </label>
-        <label for="${todoId}" class="todo-text">
-            ${todoText}
-        </label>
-        <button class="delete-button">
-            <svg fill="var(--secondary-color)" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
-        </button>
-    `
-    const deleteButton = todoLI.querySelector(".delete-button");
-    deleteButton.addEventListener("click", ()=>{
-        deleteTodoItem(todoIndex);
-    })
-    const checkbox = todoLI.querySelector("input");
-    checkbox.addEventListener("change", ()=>{
-        allTodos[todoIndex].completed = checkbox.checked;
-        saveTodos();
-    })
-    checkbox.checked = todo.completed;
-    return todoLI;
-}
-function deleteTodoItem(todoIndex){
-    allTodos = allTodos.filter((_, i)=> i !== todoIndex);
-    saveTodos();
-    updateTodoList();
-}
-function saveTodos(){
-    const todosJson = JSON.stringify(allTodos);
-    localStorage.setItem("todos", todosJson);
-}
-function getTodos(){
-    const todos = localStorage.getItem("todos") || "[]";
-    return JSON.parse(todos);
-}
-</script>
 
+        // بدء التحديث التلقائي للوقت
+        setInterval(updateTodoListTimes, 60000);
 
+        confirmYes.addEventListener('click', () => {
+            if (todoToDeleteIndex !== null) {
+                deleteTodoItem(todoToDeleteIndex);
+                todoToDeleteIndex = null;
+            }
+            confirmDialog.style.display = 'none';
+        });
 
+        confirmNo.addEventListener('click', () => {
+            todoToDeleteIndex = null;
+            confirmDialog.style.display = 'none';
+        });
 
+        todoForm.addEventListener('submit', function(e){
+            e.preventDefault();
+            if(currentlyEditingIndex !== null) {
+                updateTodo();
+            } else {
+                addTodo();
+            }
+        });
 
+        function addTodo(){
+            const todoText = todoInput.value.trim();
+            if(todoText.length > 0){
+                const now = new Date();
+                
+                const todoObject = {
+                    text: todoText,
+                    completed: false,
+                    addedAt: now.getTime()
+                }
+                allTodos.push(todoObject);
+                updateTodoList();
+                saveTodos();
+                todoInput.value = "";
+            }  
+        }
 
+        function updateTodo() {
+            const todoText = todoInput.value.trim();
+            if(todoText.length > 0) {
+                allTodos[currentlyEditingIndex].text = todoText;
+                updateTodoList();
+                saveTodos();
+                todoInput.value = "";
+                currentlyEditingIndex = null;
+                addButton.textContent = 'اضافة';
+            }
+        }
 
+        function updateTodoList(){
+            todoListUL.innerHTML = "";
+            allTodos.forEach((todo, todoIndex)=>{
+                todoItem = createTodoItem(todo, todoIndex);
+                todoListUL.append(todoItem);
+            });
+            
+            sortable = new Sortable(todoListUL, {
+                animation: 150,
+                ghostClass: 'dragging',
+                onEnd: function() {
+                    const newOrder = [];
+                    const items = todoListUL.querySelectorAll('li');
+                    items.forEach(item => {
+                        const index = parseInt(item.getAttribute('data-index'));
+                        newOrder.push(allTodos[index]);
+                    });
+                    allTodos = newOrder;
+                    saveTodos();
+                }
+            });
+        }
 
+        function updateTodoListTimes() {
+            const timeElements = document.querySelectorAll('.todo-time');
+            timeElements.forEach((el, index) => {
+                if (allTodos[index]) {
+                    el.textContent = calculateTimePassed(allTodos[index].addedAt);
+                }
+            });
+        }
 
+        function calculateTimePassed(timestamp) {
+            const now = new Date().getTime();
+            const diff = now - timestamp;
+            const minutes = Math.floor(diff / (1000 * 60));
+            
+            if (minutes < 1) return "الآن";
+            if (minutes < 60) return `منذ ${minutes} دقيقة`;
+            
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return `منذ ${hours} ساعة`;
+            
+            const days = Math.floor(hours / 24);
+            return `منذ ${days} يوم`;
+        }
 
+        function createTodoItem(todo, todoIndex){
+            const todoId = "todo-"+todoIndex;
+            const todoLI = document.createElement("li");
+            todoLI.setAttribute('data-index', todoIndex);
+            
+            const todoText = todo.text;
+            const timePassed = calculateTimePassed(todo.addedAt);
+            
+            todoLI.className = "todo";
+            todoLI.innerHTML = `
+                <input type="checkbox" id="${todoId}">
+                <label class="custom-checkbox" for="${todoId}">
+                    <svg fill="transparent" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+                </label>
+                <label for="${todoId}" class="todo-text">
+                    ${todoText}
+                </label>
+                <span class="todo-time">${timePassed}</span>
+                <button class="edit-button" title="تعديل المهمة">
+                    <svg fill="var(--secondary-color)" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg>
+                </button>
+                <button class="delete-button" title="حذف المهمة">
+                    <svg fill="var(--secondary-color)" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                </button>
+            `;
+            
+            const deleteButton = todoLI.querySelector(".delete-button");
+            deleteButton.addEventListener("click", (e)=>{
+                e.stopPropagation();
+                showDeleteConfirmation(todoIndex);
+            });
+            
+            const editButton = todoLI.querySelector(".edit-button");
+            editButton.addEventListener("click", (e)=>{
+                e.stopPropagation();
+                startEditingTodo(todoIndex);
+            });
+            
+            const checkbox = todoLI.querySelector("input");
+            checkbox.addEventListener("change", ()=>{
+                allTodos[todoIndex].completed = checkbox.checked;
+                saveTodos();
+            });
+            
+            checkbox.checked = todo.completed;
+            return todoLI;
+        }
 
+        function showDeleteConfirmation(index) {
+            todoToDeleteIndex = index;
+            confirmDialog.style.display = 'flex';
+        }
 
+        function startEditingTodo(todoIndex) {
+            currentlyEditingIndex = todoIndex;
+            todoInput.value = allTodos[todoIndex].text;
+            todoInput.focus();
+            addButton.textContent = 'حفظ التعديل';
+        }
 
+        function deleteTodoItem(todoIndex){
+            allTodos = allTodos.filter((_, i)=> i !== todoIndex);
+            saveTodos();
+            updateTodoList();
+        }
 
+        function saveTodos(){
+            const todosJson = JSON.stringify(allTodos);
+            localStorage.setItem("todos", todosJson);
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        function getTodos(){
+            const todos = localStorage.getItem("todos") || "[]";
+            return JSON.parse(todos);
+        }
+    </script>
+</body>
+</html>
