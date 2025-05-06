@@ -5,8 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title> واجباتي </title>
     <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+
     <style>
+        /* أنماط الهيدر الجديدة */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .date-clock-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background-color: var(--primary-color);
+            padding: 10px;
+            border-radius: 8px;
+            min-width: 200px;
+           
+        }
+        
+        .date-display {
+        
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 5px;
+        }
+        
+        .countdown-clock {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            direction: ltr;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .app-title {
+            flex-grow: 1;
+            text-align: center;
+        }
+        
         .app-header {
             background-color: var(--primary-color);
             color: var(--text-color);
@@ -44,6 +87,21 @@
         }
 
         @media (max-width: 480px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            .date-clock-container {
+                width: 100%;
+                margin-bottom: 10px;
+                align-items: center;
+            }
+            
+            .app-title {
+                order: -1;
+                margin-bottom: 10px;
+            }
+            
             .app-header {
                 font-size: 0.75rem;
                 padding: 5px 6px;
@@ -60,12 +118,16 @@
             --secondary-color: #4A4D57;
             --accent-color: #00FFC4;
             --text-color: #F9F9F9;
-            --category-1: #FF6B6B;
-            --category-2: #4ECDC4;
-            --category-3: #45B7D1;
-            --category-4: #FFA07A;
-            --category-5: #98D8C8;
-        }
+    --category-1: #FF6B6B;
+    --category-2: #4ECDC4;
+    --category-3: #45B7D1;
+    --category-4: #FFA07A;
+    --category-5: #98D8C8;
+    /* ألوان جديدة */
+    --category-6: #FFD166; /* أصفر */
+    --category-7: #A05195; /* بنفسجي */
+    --category-8: #FF7C43; /* برتقالي */
+}
         * {
             margin: 0;
             padding: 0;
@@ -122,7 +184,7 @@
         #add-button {
             position: absolute;
             top: -0px;
-            right: -120px;
+            right: -170px;
             background-color: var(--accent-color);
             height: 60%;
             padding: 0 30px;
@@ -266,6 +328,7 @@
         .confirm-content {
             background-color: var(--primary-color);
             padding: 20px;
+           
             border-radius: 10px;
             max-width: 90%;
             width: 400px;
@@ -347,6 +410,13 @@
         .color-3 { background-color: var(--category-3); }
         .color-4 { background-color: var(--category-4); }
         .color-5 { background-color: var(--category-5); }
+        .color-6 { background-color: var(--category-6); }
+.color-7 { background-color: var(--category-7); }
+.color-8 { background-color: var(--category-8); }
+
+.category-6 { border-right: 4px solid var(--category-6); }
+.category-7 { border-right: 4px solid var(--category-7); }
+.category-8 { border-right: 4px solid var(--category-8); }
 
         /* تحسينات للهواتف */
         @media (max-width: 768px) {
@@ -424,21 +494,130 @@
                 width: 100px;
             }
         }
+
+        /* تأثيرات النسخ */
+        @keyframes highlight {
+            0% { background-color: rgba(0, 255, 196, 0.2); }
+            100% { background-color: var(--primary-color); }
+        }
+        .copied-item {
+            animation: highlight 0.5s;
+        }
     </style>
 </head>
-<body>
-    <header class="app-header">
-        <p>
-            مرحباً بك في تطبيق <strong>واجباتي</strong> تم بواسطة <strong>أداة علم</strong> – 
-            يمكنك الوصول إلى <strong>موقعنا</strong> و <strong>صفحاتنا</strong> أو على تطبيق <strong>تيليجرام</strong> من الروابط التالية:
-        </p>
-        <div class="header-buttons">
-            <a href="https://adatealm.github.io/ADATEALM/?fbclid=IwY2xjawKC4FxleHRuA2FlbQIxMABicmlkETFhVDVUTmNWRTNJTExUb1E1AR6IoqOP7mGxEVYPq9jI-fXzmU73BTMA3eAdoaA_eXXnsZURbTu2Dlk14rsirQ_aem_bgqzUZJ81cBfmw-eEb9fPA#Download" target="_blank" rel="noopener noreferrer">زيارة الموقع</a>
-            <a href="https://t.me/adatealm/238" target="_blank" rel="noopener noreferrer">قناتنا على تطبيق التيليجرام</a>
-        </div>
-    </header>
 
-    <h1> واجباتي </h1>
+
+<header class="app-header">
+    <p>
+        مرحباً بك في تطبيق <strong>واجباتي</strong> تم بواسطة <strong>أداة علم</strong> – 
+        يمكنك الوصول إلى <strong>موقعنا</strong> و <strong>صفحاتنا</strong> أو على تطبيق <strong>تيليجرام</strong> من الروابط التالية:
+    </p>
+    <div class="header-buttons">
+        <a href="https://adatealm.github.io/ADATEALM/?fbclid=IwY2xjawKC4FxleHRuA2FlbQIxMABicmlkETFhVDVUTmNWRTNJTExUb1E1AR6IoqOP7mGxEVYPq9jI-fXzmU73BTMA3eAdoaA_eXXnsZURbTu2Dlk14rsirQ_aem_bgqzUZJ81cBfmw-eEb9fPA#Download" target="_blank" rel="noopener noreferrer">زيارة الموقع</a>
+        <a href="https://t.me/adatealm/238" target="_blank" rel="noopener noreferrer">قناتنا على تطبيق التيليجرام</a>
+    </div>
+</header>
+
+
+
+
+<body>
+
+
+
+
+    <div class="app-title">
+        <h1>واجباتي</h1>
+    </div>
+
+    <div style="display: flex; align-items: center;">
+        <div style=" padding: 5px;">
+          <img src="chronometer.gif" style="width: 50px; height: auto;">
+        </div>
+
+     
+        <div class="countdown-clock" id="countdown-clock" style="margin-left: 0px;">
+          <!-- هنا مؤقت العد التنازلي -->
+        </div>
+
+          &nbsp;  
+          
+        <div style=" padding: 5px;">
+            <img src="chronometer.gif" style="width: 50px; height: auto;">
+          </div>
+
+      </div>
+      
+      
+      
+   
+      
+
+    <div class="header-container">
+       
+
+
+
+        <div class="date-clock-container">
+            <div class="date-display" id="current-date"></div>     
+        </div>   
+          
+          <style>
+        
+          
+            .date-display {
+              font-size: 0.9rem;
+              font-weight: 600;              /* خط متوسط السماكة */
+              color: white;                  /* لون النص */
+              background-color: #444;        /* خلفية داكنة */
+              border: 2px solid #ccc;        /* إطار رقيق */
+              border-radius: 10px;           /* حواف مستديرة */
+              padding: 10px 20px;            /* مسافة داخلية */
+              text-align: center;
+              min-width: 150px;
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ظل خفيف */
+            }
+          </style>
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="digital-clock" id="digital-clock"></div>
+        
+          
+          <style>
+    
+          
+            .digital-clock {
+              font-size: 1.2rem;
+              font-weight: bold;
+              color: white;                     /* لون أبيض للساعة */
+              background-color: #333;           /* خلفية داكنة لتمييز الإطار */
+              border: 2px solid #ccc;           /* إطار خارجي */
+              border-radius: 10px;              /* حواف مستديرة */
+              padding: 15px 25px;               /* مسافة داخلية */
+              text-align: center;
+              min-width: 120px;
+            }
+          </style>
+      
+        
+          
+        
+      
+    </div> 
+ 
+
+ 
 
     <div class="wrapper">
         <form>
@@ -455,6 +634,10 @@
                 <div class="color-option color-3" data-color="3"></div>
                 <div class="color-option color-4" data-color="4"></div>
                 <div class="color-option color-5" data-color="5"></div>
+                <!-- ألوان جديدة -->
+                <div class="color-option color-6" data-color="6"></div>
+                <div class="color-option color-7" data-color="7"></div>
+                <div class="color-option color-8" data-color="8"></div>
             </div>
         </form>
 
@@ -493,6 +676,70 @@
     </footer>
 
     <script>
+        // دالة لتحويل التاريخ الميلادي إلى هجري
+        function gregorianToHijri(date) {
+            const gregDate = new Date(date);
+            const gregYear = gregDate.getFullYear();
+            const gregMonth = gregDate.getMonth() + 1;
+            const gregDay = gregDate.getDate();
+            
+            // معادلة تقريبية للتحويل (ليست دقيقة تماماً)
+            const hijriYear = Math.floor((gregYear - 622) * (33 / 32));
+            const hijriDate = new Intl.DateTimeFormat('ar-u-ca-islamic', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            }).format(gregDate);
+            
+            return hijriDate;
+        }
+
+        // دالة لعرض التاريخ الحالي
+        function updateCurrentDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const gregorianDate = now.toLocaleDateString('ar-EG', options);
+            const hijriDate = gregorianToHijri(now);
+            
+            document.getElementById('current-date').innerHTML = `
+                <div>${gregorianDate}</div>
+                <div>${hijriDate}</div>
+            `;
+        }
+
+        // دالة لعرض الساعة الرقمية
+        function updateDigitalClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            document.getElementById('digital-clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // دالة لحساب الوقت المتبقي حتى منتصف الليل
+        function updateCountdownClock() {
+            const now = new Date();
+            const midnight = new Date();
+            midnight.setHours(24, 0, 0, 0);
+            
+            const diff = midnight - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60)).toString().padStart(2, '0');
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            
+            document.getElementById('countdown-clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // تحديث التاريخ والساعة كل ثانية
+        updateCurrentDate();
+        updateDigitalClock();
+        updateCountdownClock();
+        setInterval(updateCurrentDate, 1000 * 60 * 60); // تحديث التاريخ كل ساعة
+        setInterval(updateDigitalClock, 1000);
+        setInterval(updateCountdownClock, 1000);
+
+        // بقية الكود الخاص بقائمة المهام
         const todoForm = document.querySelector('form');
         const todoInput = document.getElementById('todo-input');
         const todoListUL = document.getElementById('todo-list');
@@ -688,7 +935,11 @@
             const todoLI = document.createElement("li");
             todoLI.setAttribute('data-index', todoIndex);
             
-            const todoText = todo.text;
+            let displayText = todo.text;
+            if (todo.copiedFrom !== null) {
+                displayText = `${todo.text} <span style="color: var(--secondary-color); font-size: 0.8em;">←</span>`;
+            }
+            
             const timePassed = calculateTimePassed(todo.addedAt);
             
             // إضافة فئة اللون إذا كان موجوداً
@@ -703,7 +954,7 @@
                     <svg fill="transparent" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
                 </label>
                 <label for="${todoId}" class="todo-text">
-                    ${todoText}
+                    ${displayText}
                 </label>
                 <span class="todo-time">${timePassed}</span>
                 <div class="todo-actions">
@@ -811,9 +1062,20 @@
                 copiedFrom: todoIndex
             };
             
-            allTodos.push(copiedTodo);
+            // إدراج المهمة المنسوخة بعد المهمة الأصلية مباشرة
+            allTodos.splice(todoIndex + 1, 0, copiedTodo);
             saveTodos();
+            
+            // تطبيق تأثير التمييز على العنصر المنسوخ
             updateTodoList();
+            const newTodoIndex = todoIndex + 1;
+            const newTodoItem = document.querySelector(`li[data-index="${newTodoIndex}"]`);
+            if (newTodoItem) {
+                newTodoItem.classList.add('copied-item');
+                setTimeout(() => {
+                    newTodoItem.classList.remove('copied-item');
+                }, 500);
+            }
         }
 
         function deleteTodoItem(todoIndex){
@@ -842,6 +1104,229 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إشعارات هامة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* خلفية داكنة */
+            color: #fff; /* نص أبيض */
+        }
+        .custom-modal {
+            display: flex;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.1); /* تعتيم فاتح */
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+        .custom-modal-content {
+            background-color: #1a1a1a; /* خلفية داكنة للمودال */
+            color: #fff; /* نص أبيض */
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .custom-button {
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn-close {
+            background-color: #d9534f;
+            color: white;
+        }
+        .btn-close:hover {
+            background-color: #c9302c;
+            transform: scale(1.05);
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <!-- إشعار سورة الكهف -->
+    <div id="kahfModal" class="custom-modal" style="display: none;">
+        <div class="custom-modal-content">
+            <h1> فضل سورة الكهف </h1>
+            <p>من قرأ سورةَ ( الكهفِ ) في يومِ الجمعةِ أضاء له من النورِ ما بين الجمُعَتَين
+              الراوي : أبو سعيد الخدري | المحدث : الألباني | المصدر : صحيح الترغيب | الصفحة أو الرقم : 736 | خلاصة حكم المحدث : صحيح | التخريج : أخرجه البيهقي (6209) واللفظ له، وأخرجه الحاكم (3392) باختلاف يسير</p>
+           
+
+
+
+
+            <button onclick="window.location.href='سورة الكهف مكتوبة.html'" class="custom-button">انتقل إليها الآن</button>
+           <br><br>
+           <button class="custom-button btn-close" onclick="closeModal('kahfModal')">إغلاق</button>
+        </div>
+    </div>
+    
+    <!-- إشعار صلاة الجمعة -->
+    <div id="jumaaModal" class="custom-modal" style="display: none;">
+        <div class="custom-modal-content">
+            <h1> فضل صلاة الجمعة </h1>
+            <audio id="jumaaAudio">
+                <source src="SALAT JOMOAA/JOMAA.mp3" type="audio/mpeg">
+                متصفحك لا يدعم تشغيل الصوت.
+            </audio>
+
+
+
+
+            <p>
+            
+من غسَّلَ يومَ الجمعةِ واغتسلَ ثمَّ بَكَّرَ وابتَكرَ ومشى ولم يرْكب ودنا منَ الإمامِ فاستمعَ ولم يلغُ كانَ لَهُ بِكلِّ خطوةٍ عملُ سنةٍ أجرُ صيامِها وقيامِها
+الراوي : أوس بن أبي أوس وقيل أوس بن أوس والد عمرو | المحدث : الألباني | المصدر : صحيح أبي داود
+الصفحة أو الرقم: 345 | خلاصة حكم المحدث : صحيح
+
+</p>
+       
+
+              الصَّلَوَاتُ الخَمْسُ، وَالْجُمْعَةُ إلى الجُمْعَةِ، وَرَمَضَانُ إلى رَمَضَانَ، مُكَفِّرَاتٌ ما بيْنَهُنَّ إِذَا اجْتَنَبَ الكَبَائِرَ.
+  الراوي : أبو هريرة | المحدث : مسلم | المصدر : صحيح مسلم
+  الصفحة أو الرقم: 233 | خلاصة حكم المحدث : [صحيح]
+  </p>
+
+
+            <p>قال رسول الله ﷺ: "أفضلُ يومٍ طلعتْ فيه الشمسُ يومُ الجمعةِ، فيه خُلِقَ آدمُ، وفيه أُدخلَ الجنةَ، وفيه أُخرجَ منها"
+              .   [صحيح] - [رواه مسلم] - [صحيح مسلم - 854]
+            </p>
+
+
+        
+
+            <button class="custom-button btn-close" onclick="closeModal('jumaaModal')">إغلاق</button>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+      function closeModal(modalId) {
+          document.getElementById(modalId).style.display = "none";
+      }
+  
+      function showModals() {
+          let today = new Date();
+          let dayOfWeek = today.getDay();
+          let hours = today.getHours();
+  
+          // ✅ عرض الإشعار العام فورًا
+          document.getElementById("generalModal").style.display = "flex";
+  
+          if (dayOfWeek === 5) { // الجمعة فقط
+              document.getElementById("kahfModal").style.display = "flex"; // إشعار سورة الكهف
+  
+              if (hours < 14) { // قبل 14:00 فقط
+                  document.getElementById("jumaaModal").style.display = "flex"; // إشعار صلاة الجمعة
+                  
+                  let audio = document.getElementById("jumaaAudio");
+                  if (audio && !audio.dataset.played) { // تشغيل الصوت عند ظهور الإشعار
+                      let playAudio = () => {
+                          audio.play().then(() => {
+                              audio.dataset.played = "true"; // منع التكرار
+                              console.log("تم تشغيل صوت صلاة الجمعة.");
+                          }).catch(error => console.log("تشغيل الصوت يتطلب تفاعل المستخدم", error));
+                      };
+  
+                      if (document.hasFocus()) {
+                          playAudio();
+                      } else {
+                          document.addEventListener("click", playAudio, { once: true });
+                          document.addEventListener("touchstart", playAudio, { once: true });
+                      }
+  
+                      audio.onended = function () {
+                          console.log("انتهى تشغيل ملف الصوت.");
+                      };
+                  }
+              }
+          }
+      }
+  
+      document.addEventListener("DOMContentLoaded", function() {
+          let today = new Date();
+          let dayOfWeek = today.getDay();
+          let hours = today.getHours();
+  
+          if (dayOfWeek === 5 && hours < 14) { // تشغيل الصوت فقط يوم الجمعة قبل 14:00
+              let audio = document.getElementById("jumaaAudio");
+              if (audio) {
+                  document.body.addEventListener("click", function() {
+                      if (audio.paused) {
+                          audio.play().catch(error => console.log("تشغيل الصوت يتطلب تفاعل المستخدم", error));
+                      }
+                  }, { once: true });
+              }
+          }
+      });
+  
+      // ✅ تشغيل `showModals` دائمًا لإظهار الإشعار العام مباشرةً
+      window.onload = showModals;
+  </script>
+  
+
 
 
 
