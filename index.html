@@ -1140,21 +1140,19 @@
 
 
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>إشعارات هامة</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000; /* خلفية داكنة */
-            color: #fff; /* نص أبيض */
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
         }
         .custom-modal {
             display: flex;
@@ -1164,21 +1162,26 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.1); /* تعتيم فاتح */
+            background-color: rgba(255, 255, 255, 0.1);
             justify-content: center;
             align-items: center;
             padding: 10px;
+            box-sizing: border-box;
         }
         .custom-modal-content {
-            background-color: #1a1a1a; /* خلفية داكنة للمودال */
-            color: #fff; /* نص أبيض */
-            padding: 20px;
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 15px;
             border-radius: 15px;
-            width: 90%;
+            width: 95%;
             max-width: 350px;
+            max-height: 90vh;
+            overflow-y: auto;
             text-align: center;
             box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
             animation: fadeIn 0.3s ease-in-out;
+            box-sizing: border-box;
+            margin: 10px;
         }
         .custom-button {
             padding: 10px;
@@ -1188,6 +1191,9 @@
             cursor: pointer;
             border: none;
             transition: background 0.3s, transform 0.2s;
+            width: 100%;
+            margin: 5px 0;
+            box-sizing: border-box;
         }
         .btn-close {
             background-color: #d9534f;
@@ -1197,167 +1203,153 @@
             background-color: #c9302c;
             transform: scale(1.05);
         }
+        h1 {
+            font-size: 1.3rem;
+            margin-top: 0;
+        }
+        p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 480px) {
+            .custom-modal-content {
+                padding: 12px;
+                width: 98%;
+            }
+            h1 {
+                font-size: 1.2rem;
+            }
+            p {
+                font-size: 0.85rem;
+            }
+            .custom-button {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
-
-
 </head>
 <body>
 
     <!-- إشعار سورة الكهف -->
     <div id="kahfModal" class="custom-modal" style="display: none;">
         <div class="custom-modal-content">
-            <h1> فضل سورة الكهف </h1>
+            <h1>فضل سورة الكهف</h1>
             <p>من قرأ سورةَ ( الكهفِ ) في يومِ الجمعةِ أضاء له من النورِ ما بين الجمُعَتَين
               الراوي : أبو سعيد الخدري | المحدث : الألباني | المصدر : صحيح الترغيب | الصفحة أو الرقم : 736 | خلاصة حكم المحدث : صحيح | التخريج : أخرجه البيهقي (6209) واللفظ له، وأخرجه الحاكم (3392) باختلاف يسير</p>
            
-
-
-
-
             <button onclick="window.location.href='سورة الكهف مكتوبة.html'" class="custom-button">انتقل إليها الآن</button>
-           <br><br>
-           <button class="custom-button btn-close" onclick="closeModal('kahfModal')">إغلاق</button>
+            <button class="custom-button btn-close" onclick="closeModal('kahfModal')">إغلاق</button>
         </div>
     </div>
     
     <!-- إشعار صلاة الجمعة -->
     <div id="jumaaModal" class="custom-modal" style="display: none;">
         <div class="custom-modal-content">
-            <h1> فضل صلاة الجمعة </h1>
+            <h1>فضل صلاة الجمعة</h1>
             <audio id="jumaaAudio">
                 <source src="SALAT JOMOAA/JOMAA.mp3" type="audio/mpeg">
                 متصفحك لا يدعم تشغيل الصوت.
             </audio>
 
-
-
-
-            <p>
-            
-من غسَّلَ يومَ الجمعةِ واغتسلَ ثمَّ بَكَّرَ وابتَكرَ ومشى ولم يرْكب ودنا منَ الإمامِ فاستمعَ ولم يلغُ كانَ لَهُ بِكلِّ خطوةٍ عملُ سنةٍ أجرُ صيامِها وقيامِها
-الراوي : أوس بن أبي أوس وقيل أوس بن أوس والد عمرو | المحدث : الألباني | المصدر : صحيح أبي داود
-الصفحة أو الرقم: 345 | خلاصة حكم المحدث : صحيح
-
-</p>
-       
-
-              الصَّلَوَاتُ الخَمْسُ، وَالْجُمْعَةُ إلى الجُمْعَةِ، وَرَمَضَانُ إلى رَمَضَانَ، مُكَفِّرَاتٌ ما بيْنَهُنَّ إِذَا اجْتَنَبَ الكَبَائِرَ.
-  الراوي : أبو هريرة | المحدث : مسلم | المصدر : صحيح مسلم
-  الصفحة أو الرقم: 233 | خلاصة حكم المحدث : [صحيح]
-  </p>
-
+            <p>من غسَّلَ يومَ الجمعةِ واغتسلَ ثمَّ بَكَّرَ وابتَكرَ ومشى ولم يرْكب ودنا منَ الإمامِ فاستمعَ ولم يلغُ كانَ لَهُ بِكلِّ خطوةٍ عملُ سنةٍ أجرُ صيامِها وقيامِها
+            الراوي : أوس بن أبي أوس وقيل أوس بن أوس والد عمرو | المحدث : الألباني | المصدر : صحيح أبي داود
+            الصفحة أو الرقم: 345 | خلاصة حكم المحدث : صحيح</p>
+           
+            <p>الصَّلَوَاتُ الخَمْسُ، وَالْجُمْعَةُ إلى الجُمْعَةِ، وَرَمَضَانُ إلى رَمَضَانَ، مُكَفِّرَاتٌ ما بيْنَهُنَّ إِذَا اجْتَنَبَ الكَبَائِرَ.
+            الراوي : أبو هريرة | المحدث : مسلم | المصدر : صحيح مسلم
+            الصفحة أو الرقم: 233 | خلاصة حكم المحدث : [صحيح]</p>
 
             <p>قال رسول الله ﷺ: "أفضلُ يومٍ طلعتْ فيه الشمسُ يومُ الجمعةِ، فيه خُلِقَ آدمُ، وفيه أُدخلَ الجنةَ، وفيه أُخرجَ منها"
-              .   [صحيح] - [رواه مسلم] - [صحيح مسلم - 854]
-            </p>
-
-
-        
+            . [صحيح] - [رواه مسلم] - [صحيح مسلم - 854]</p>
 
             <button class="custom-button btn-close" onclick="closeModal('jumaaModal')">إغلاق</button>
         </div>
     </div>
 
-
-
-
+    <!-- الإشعار العام -->
+    <div id="generalModal" class="custom-modal" style="display: none;">
+        <div class="custom-modal-content">
+            <h1>⚡ أَدَاة عِلْم ⚡</h1>
+            <p>نحن نعمل باستمرار على تطوير وتحسين موقعنا لنقدم لك أفضل تجربة ممكنة.</p>
+            <p>المزيد قادم والتحديثات يومية ان شاء الله</p>
+            <p>نذكركم ان التجربة على اجهزة الكمبيوتر افضل بكثير على الهواتف وسنحاول باذن الله تحسين تجربة على الهواتف</p>
+            <button class="custom-button btn-close" onclick="closeModal('generalModal')">إغلاق</button>
+        </div>
+    </div>
 
     <script>
-      function closeModal(modalId) {
-          document.getElementById(modalId).style.display = "none";
-      }
-  
-      function showModals() {
-          let today = new Date();
-          let dayOfWeek = today.getDay();
-          let hours = today.getHours();
-  
-          // ✅ عرض الإشعار العام فورًا
-          document.getElementById("generalModal").style.display = "flex";
-  
-          if (dayOfWeek === 5) { // الجمعة فقط
-              document.getElementById("kahfModal").style.display = "flex"; // إشعار سورة الكهف
-  
-              if (hours < 14) { // قبل 14:00 فقط
-                  document.getElementById("jumaaModal").style.display = "flex"; // إشعار صلاة الجمعة
-                  
-                  let audio = document.getElementById("jumaaAudio");
-                  if (audio && !audio.dataset.played) { // تشغيل الصوت عند ظهور الإشعار
-                      let playAudio = () => {
-                          audio.play().then(() => {
-                              audio.dataset.played = "true"; // منع التكرار
-                              console.log("تم تشغيل صوت صلاة الجمعة.");
-                          }).catch(error => console.log("تشغيل الصوت يتطلب تفاعل المستخدم", error));
-                      };
-  
-                      if (document.hasFocus()) {
-                          playAudio();
-                      } else {
-                          document.addEventListener("click", playAudio, { once: true });
-                          document.addEventListener("touchstart", playAudio, { once: true });
-                      }
-  
-                      audio.onended = function () {
-                          console.log("انتهى تشغيل ملف الصوت.");
-                      };
-                  }
-              }
-          }
-      }
-  
-      document.addEventListener("DOMContentLoaded", function() {
-          let today = new Date();
-          let dayOfWeek = today.getDay();
-          let hours = today.getHours();
-  
-          if (dayOfWeek === 5 && hours < 14) { // تشغيل الصوت فقط يوم الجمعة قبل 14:00
-              let audio = document.getElementById("jumaaAudio");
-              if (audio) {
-                  document.body.addEventListener("click", function() {
-                      if (audio.paused) {
-                          audio.play().catch(error => console.log("تشغيل الصوت يتطلب تفاعل المستخدم", error));
-                      }
-                  }, { once: true });
-              }
-          }
-      });
-  
-      // ✅ تشغيل `showModals` دائمًا لإظهار الإشعار العام مباشرةً
-      window.onload = showModals;
-  </script>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+    
+        function showModals() {
+            let today = new Date();
+            let dayOfWeek = today.getDay();
+            let hours = today.getHours();
+    
+            // ✅ عرض الإشعار العام فورًا
+            document.getElementById("generalModal").style.display = "flex";
+    
+            if (dayOfWeek === 5) { // الجمعة فقط
+                document.getElementById("kahfModal").style.display = "flex"; // إشعار سورة الكهف
+    
+                if (hours < 14) { // قبل 14:00 فقط
+                    document.getElementById("jumaaModal").style.display = "flex"; // إشعار صلاة الجمعة
+                    
+                    let audio = document.getElementById("jumaaAudio");
+                    if (audio && !audio.dataset.played) { // تشغيل الصوت عند ظهور الإشعار
+                        let playAudio = () => {
+                            audio.play().then(() => {
+                                audio.dataset.played = "true"; // منع التكرار
+                                console.log("تم تشغيل صوت صلاة الجمعة.");
+                            }).catch(error => console.log("تشغيل الصوت يتطلب تفاعل المستخدم", error));
+                        };
+    
+                        if (document.hasFocus()) {
+                            playAudio();
+                        } else {
+                            document.addEventListener("click", playAudio, { once: true });
+                            document.addEventListener("touchstart", playAudio, { once: true });
+                        }
+    
+                        audio.onended = function () {
+                            console.log("انتهى تشغيل ملف الصوت.");
+                        };
+                    }
+                }
+            }
+        }
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            let today = new Date();
+            let dayOfWeek = today.getDay();
+            let hours = today.getHours();
+    
+            if (dayOfWeek === 5 && hours < 14) { // تشغيل الصوت فقط يوم الجمعة قبل 14:00
+                let audio = document.getElementById("jumaaAudio");
+                if (audio) {
+                    document.body.addEventListener("click", function() {
+                        if (audio.paused) {
+                            audio.play().catch(error => console.log("تشغيل الصوت يتطلب تفاعل المستخدم", error));
+                        }
+                    }, { once: true });
+                }
+            }
+        });
+    
+        // ✅ تشغيل `showModals` دائمًا لإظهار الإشعار العام مباشرةً
+        window.onload = showModals;
+    </script>
+</body>
+</html>
 
 
 
