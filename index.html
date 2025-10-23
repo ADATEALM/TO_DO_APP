@@ -159,6 +159,14 @@
             text-transform: uppercase;
             color: var(--accent-color);
         }
+
+        /* === ⭐️⭐️⭐️ هذا هو الإصلاح ⭐️⭐️⭐️ === */
+        /* إصلاح لمشكلة اختفاء العنوان في الوضع المضيء */
+        body.light-mode #main-header h1 {
+            color: var(--text-color); /* استخدام لون النص الأساسي (الداكن) */
+        }
+        /* === ⭐️⭐️⭐️ نهاية الإصلاح ⭐️⭐️⭐️ === */
+
         
         /* زر تبديل الثيم (جديد) */
         #theme-toggle-btn {
@@ -1409,6 +1417,333 @@
                 initSortable();
             }
         });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>إشعارات هامة</title>
+    <style>
+        /* ================= */
+        /* متغيرات التصميم الأساسية (متطابقة مع تطبيق واجباتي) */
+        /* ================= */
+        :root {
+            --background: #101114;
+            --primary-color: #1C1D20;
+            --secondary-color: #4A4D57;
+            --accent-color: #00FFC4;
+            --text-color: #F9F9F9;
+            --danger-color: #ff0033;
+            --danger-hover: #cc0022;
+        }
+
+        /* متغيرات الوضع المضيء */
+        body.light-mode {
+            --background: #F4F7F6;
+            --primary-color: #FFFFFF;
+            --secondary-color: #A9B4C2;
+            --text-color: #101114;
+            --accent-color: #00A881;
+            --danger-color: #D90429;
+            --danger-hover: #B20021;
+        }
+
+        /* ================= */
+        /* الأنماط العامة */
+        /* ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            touch-action: manipulation;
+        }
+
+        html {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ================= */
+        /* أنماط الإشعارات (Modal) */
+        /* ================= */
+        .custom-modal {
+            display: flex;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            /* استخدام خلفية داكنة شفافة قياسية */
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .custom-modal-content {
+            /* استخدام لون الخلفية الأساسي من التطبيق */
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 20px;
+            /* استخدام نفس حواف نافذة التأكيد */
+            border-radius: 10px;
+            width: 95%;
+            max-width: 400px; /* زيادة طفيفة للعرض */
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            /* استخدام نفس حدود نافذة التأكيد */
+            border: 1px solid var(--accent-color);
+            animation: fadeIn 0.3s ease-in-out;
+            box-sizing: border-box;
+            margin: 10px;
+        }
+
+        h1 {
+            font-size: 1.3rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            /* استخدام لون التمييز للعناوين */
+            color: var(--accent-color);
+        }
+
+        p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            text-align: right; /* محاذاة أفضل للنصوص العربية */
+        }
+        
+        /* تنسيق الاقتباسات */
+        p:first-of-type {
+            font-style: italic;
+            padding: 10px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        
+        body.light-mode p:first-of-type {
+            background: rgba(0,0,0,0.05);
+        }
+
+
+        /* ================= */
+        /* أنماط الأزرار (Modal Buttons) */
+        /* ================= */
+        .custom-button {
+            padding: 10px 20px;
+            border-radius: 5px; /* تطابق أزرار التطبيق */
+            font-size: 1rem; /* حجم خط أوضح */
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s, color 0.3s;
+            width: 100%;
+            margin: 5px 0;
+            box-sizing: border-box;
+            font-weight: bold; /* تطابق أزرار التطبيق */
+
+            /* الزر الافتراضي (مثل "انتقل إليها") يأخذ لون التمييز */
+            background-color: var(--accent-color);
+            color: var(--background);
+        }
+        
+        /* زر الإغلاق يأخذ لون الخطر */
+        .btn-close {
+            background-color: var(--danger-color);
+            color: white; /* اللون الأبيض ثابت لأزرار الخطر */
+        }
+
+        /* تأثيرات Hover */
+        body.light-mode .custom-button {
+            color: var(--primary-color);
+        }
+        body.light-mode .custom-button:hover {
+            background-color: #007d60; /* نفس تأثير الهوفر في التطبيق */
+        }
+        
+        .custom-button:not(.btn-close):hover {
+             background-color: #00cfa1; /* تأثير هوفر خفيف */
+        }
+
+        .btn-close:hover {
+            background-color: var(--danger-hover);
+        }
+        
+        /* ================= */
+        /* الاستجابة للهواتف والرسوم المتحركة */
+        /* ================= */
+        @media (max-width: 480px) {
+            .custom-modal-content {
+                padding: 15px;
+                width: 98%;
+            }
+            h1 {
+                font-size: 1.2rem;
+            }
+            p {
+                font-size: 0.85rem;
+            }
+            .custom-button {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="kahfModal" class="custom-modal" style="display: none;">
+        <div class="custom-modal-content">
+            <h1>فضل سورة الكهف</h1>
+            <p>من قرأ سورةَ ( الكهفِ ) في يومِ الجمعةِ أضاء له من النورِ ما بين الجمُعَتَين
+             <br><small>(الراوي: أبو سعيد الخدري | المحدث: الألباني | المصدر: صحيح الترغيب | الرقم: 736)</small></p>
+            
+            <button onclick="window.location.href='سورة الكهف مكتوبة.html'" class="custom-button">انتقل إليها الآن</button>
+            <button class="custom-button btn-close" onclick="closeModal('kahfModal')">إغلاق</button>
+        </div>
+    </div>
+    
+    <div id="jumaaModal" class="custom-modal" style="display: none;">
+        <div class="custom-modal-content">
+            <h1>فضل صلاة الجمعة</h1>
+            <audio id="jumaaAudio">
+                <source src="SALAT JOMOAA/JOMAA.mp3" type="audio/mpeg">
+                متصفحك لا يدعم تشغيل الصوت.
+            </audio>
+
+            <p>من غسَّلَ يومَ الجمعةِ واغتسلَ ثمَّ بَكَّرَ وابتَكرَ ومشى ولم يرْكب ودنا منَ الإمامِ فاستمعَ ولم يلغُ كانَ لَهُ بِكلِّ خطوةٍ عملُ سنةٍ أجرُ صيامِها وقيامِها
+             <br><small>(الراوي: أوس بن أبي أوس | المحدث: الألباني | المصدر: صحيح أبي داود | الرقم: 345)</small></p>
+            
+            <p>الصَّلَوَاتُ الخَمْسُ، وَالْجُمْعَةُ إلى الجُمْعَةِ، وَرَمَضَانُ إلى رَمَضَانَ، مُكَفِّرَاتٌ ما بيْنَهُنَّ إِذَا اجْتَنَبَ الكَبَائِرَ.
+             <br><small>(الراوي: أبو هريرة | المحدث: مسلم | المصدر: صحيح مسلم | الرقم: 233)</small></p>
+
+            <button class="custom-button btn-close" onclick="closeModal('jumaaModal')">إغلاق</button>
+        </div>
+    </div>
+
+    <div id="generalModal" class="custom-modal" style="display: none;">
+        <div class="custom-modal-content">
+            <h1>⚡ أَدَاة عِلْم ⚡</h1>
+            <p>نحن نعمل باستمرار على تطوير وتحسين موقعنا لنقدم لك أفضل تجربة ممكنة.</p>
+            <p>المزيد قادم والتحديثات يومية ان شاء الله.</p>
+            <button class="custom-button btn-close" onclick="closeModal('generalModal')">إغلاق</button>
+        </div>
+    </div>
+
+    <script>
+        // =======================
+        //  منطق تبديل الثيم (من تطبيق واجباتي)
+        //  (يجب أن يعمل أولاً ليتم تطبيق الثيم قبل إظهار الإشعار)
+        // =======================
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                document.body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        // تطبيق الثيم المحفوظ عند تحميل الصفحة
+        const savedTheme = localStorage.getItem('theme') || 'dark'; // الوضع المظلم هو الافتراضي
+        applyTheme(savedTheme);
+
+
+        // =======================
+        //  منطق الإشعارات (الكود الأصلي الخاص بك)
+        // =======================
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+    
+        function showModals() {
+            let today = new Date();
+            let dayOfWeek = today.getDay();
+            let hours = today.getHours();
+    
+            // ✅ عرض الإشعار العام فورًا
+            document.getElementById("generalModal").style.display = "flex";
+    
+            // ✅ تم حذف السطر الخاص بـ eidAdhaModal لأنه غير موجود
+            
+            if (dayOfWeek === 5) { // الجمعة فقط
+                document.getElementById("kahfModal").style.display = "flex"; // إشعار سورة الكهف
+    
+                if (hours < 14) { // قبل 14:00 فقط
+                    document.getElementById("jumaaModal").style.display = "flex"; // إشعار صلاة الجمعة
+                    
+                    let audio = document.getElementById("jumaaAudio");
+                    if (audio && !audio.dataset.played) { // تشغيل الصوت عند ظهور الإشعار
+                        let playAudio = () => {
+                            audio.play().then(() => {
+                                audio.dataset.played = "true"; // منع التكرار
+                                console.log("تم تشغيل صوت صلاة الجمعة.");
+                            }).catch(error => console.log("تشغيل الصوت يتطلب تفاعل المستخدم", error));
+                        };
+    
+                        // محاولة التشغيل التلقائي، إذا فشل، انتظر تفاعل المستخدم
+                        playAudio();
+                        document.addEventListener("click", playAudio, { once: true });
+                        document.addEventListener("touchstart", playAudio, { once: true });
+    
+                        audio.onended = function () {
+                            console.log("انتهى تشغيل ملف الصوت.");
+                        };
+                    }
+                }
+            }
+        }
+    
+        // (الكود بالأسفل لم يعد ضرورياً لأننا دمجنا التشغيل في showModals)
+        /*
+        document.addEventListener("DOMContentLoaded", function() {
+            let today = new Date();
+            let dayOfWeek = today.getDay();
+            let hours = today.getHours();
+    
+            if (dayOfWeek === 5 && hours < 14) { // تشغيل الصوت فقط يوم الجمعة قبل 14:00
+                let audio = document.getElementById("jumaaAudio");
+                if (audio) {
+                    document.body.addEventListener("click", function() {
+                        if (audio.paused) {
+                            audio.play().catch(error => console.log("تشغيل الصوت يتطلب تفاعل المستخدم", error));
+                        }
+                    }, { once: true });
+                }
+            }
+        });
+        */
+    
+        // ✅ تشغيل `showModals` دائمًا لإظهار الإشعار العام مباشرةً
+        window.onload = showModals;
     </script>
 </body>
 </html>
